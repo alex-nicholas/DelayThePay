@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-title>
+      <span>Dashboard</span>
+      <span class="spacer"></span>
+      <button mat-mini-fab class="fab-add-button" (click)="updateDisplay()"><mat-icon>refresh</mat-icon></button>
+    </mat-card-title>
+    <mat-card-subtitle class="card-subtitle">performance metrics</mat-card-subtitle>
+  <mat-card-content>
+    <div fxFlexOffset.gt-sm="0%" fxFlex.gt-sm="33%">
+      <mat-card class="link-card" [routerLink]="['/customers']">
+        <mat-card-title>Customers</mat-card-title>
+        <mat-card-content>
+          <p class="dashboard-card-value">{{ customerCount }}</p>
+        </mat-card-content>    
+      </mat-card>
+    </div>
+    <div fxFlexOffset.gt-sm="3%" fxFlex.gt-sm="33%">
+      <mat-card class="link-card" [routerLink]="['/laybys']">
+        <mat-card-title>Active Laybys</mat-card-title>
+        <mat-card-content>
+            <p class="dashboard-card-value">{{ activeLaybyCount }}</p>
+          </mat-card-content>        
+      </mat-card>
+    </div>
+    <div fxFlexOffset.gt-sm="3%" fxFlex.gt-sm="33%">
+      <mat-card>
+        <mat-card-title>Total Income</mat-card-title>
+        <mat-card-content>
+            <p class="dashboard-card-value">{{ totalLaybyValue | dollars }}</p>
+          </mat-card-content>      
+      </mat-card>
+    </div>
+  </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>Payments</mat-card-title>
+    <mat-card-subtitle class='card-subtitle'>Payments / Time</mat-card-subtitle>
+    <mat-card-content>
+      <div fxFlexOffset.gt-sm="10%" fxFlex.gt-sm="85%">
+          <dx-chart
+          id="chart"
+          [dataSource]="payments">
+          <dxi-series
+              argumentField="Date"
+              valueField="Amount"
+              name="Payment Value"
+              type="bar"
+              color='dodgerblue'>
+          </dxi-series>
+      </dx-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>

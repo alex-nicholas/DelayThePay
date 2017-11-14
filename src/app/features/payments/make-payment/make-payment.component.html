@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-title>Layby For {{ layby.Customer.Name }}</mat-card-title>
+  <mat-card-subtitle class="card-subtitle">Make a payment</mat-card-subtitle>
+<mat-card-content>
+
+  <mat-input-container class="card-content">
+    <input matInput type="number" name="paymentAmount" placeholder="Amount Paid" [(ngModel)]='payment.Amount'>
+  </mat-input-container>
+
+  <br>
+  <br>
+
+  <mat-input-container class="card-content">
+    <input matInput [matDatepicker]='picker' name="paymentDate" placeholder="Payment Date" [(ngModel)]='payment.Date'>
+    <mat-datepicker-toggle mdSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-input-container>
+
+</mat-card-content>
+<mat-card-actions align="right">
+  <button mat-raised-button color="primary" (click)="makePayment()">Create</button>
+  <button mat-raised-button color="accent" (click)="goBack()">Cancel</button>
+</mat-card-actions>
+</mat-card>

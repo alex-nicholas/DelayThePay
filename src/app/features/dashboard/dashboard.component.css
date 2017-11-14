@@ -1,0 +1,11 @@
+.dashboard-card-value {
+    width:100%;
+    text-align: center;
+    color: #777777;
+    font-size: 47px;
+}
+
+.link-card:hover {
+    cursor: pointer;
+    background: rgb(248, 250, 255);
+}

@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>
+    <span>Customers</span>
+    <span class="spacer"></span>
+    <button mat-mini-fab class="fab-add-button" [routerLink]="['/customer-profile', id]">+</button>
+  </mat-card-title>
+  
+  <mat-card-content>
+    <dx-data-grid
+    #customerGrid
+    id="gridContainer"
+    [dataSource]="customers"
+    [hoverStateEnabled]="true"
+    [selectedRowKeys]="[]"
+    [columns]="['Name', 'Email', 'Phone', 'Laybys']" (dblclick)="viewDetails(customerGrid.selectedRowKeys[0].Id)">
+    <dxo-selection mode='single'></dxo-selection>
+    </dx-data-grid>
+  </mat-card-content>
+</mat-card>

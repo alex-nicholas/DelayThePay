@@ -1,0 +1,16 @@
+<dx-data-grid
+#laybyGrid
+id="gridContainer"
+[dataSource]="laybys"
+[hoverStateEnabled]="true"
+[selectedRowKeys]="[]"
+[columns]="['Customer.Name', 
+            'Order.OrderTotal',
+            'LaybyDuration', 
+            'PaymentFrequency',
+            'DateCreated',
+            'IsPaid',
+            'IsOverdue']" 
+            (dblclick)="viewDetails(laybyGrid.selectedRowKeys[0].Id)">
+<dxo-selection mode='single'></dxo-selection>
+</dx-data-grid>

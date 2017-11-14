@@ -1,0 +1,89 @@
+/* 
+    Material Design Theme Import.
+*/
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+/*
+    Main Content
+*/
+
+body {
+    font-family: 'Raleway', sans-serif;
+    color: #dedede;
+    background-color: lightGrey;
+    margin: 0;
+}
+
+.main-container {
+    margin-top: 10px;
+}
+
+.menu-icon {
+    color: white;
+}
+
+.menu-icon :hover {
+    cursor: pointer;
+}
+
+/*
+    Component Styling (Global)
+*/
+
+h2 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 25px;
+}
+
+.fab-add-button {
+    position: absolute;
+    right: -88%;
+}
+
+/*
+    Card Control
+*/
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.card-content {
+    margin-left: 150px;
+}
+
+.card-subtitle {
+    font-size: 10pt;
+    margin-top: 10px;
+    margin-left: 50px;
+    color: lightslategray;
+}
+
+.card {
+    margin-top:10px;
+}
+
+/*
+    Footer Style
+*/
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    left:0px;
+    width:100%;
+    background-color: white;
+}
+
+.footer-content {
+    position: relative;
+    left:15%;
+}

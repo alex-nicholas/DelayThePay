@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-title *ngIf='isNew === false'>{{ layby.Customer.Name }}</mat-card-title>
+  <mat-card-title *ngIf='isNew === true'>New Layby</mat-card-title>
+  <mat-card-subtitle class="card-subtitle">Layby Details</mat-card-subtitle>
+<mat-card-content>
+  <mat-input-container class="card-content">
+    <input *ngIf="!isNew" matInput name="customerName" 
+           placeholder="Customer Name" 
+           [(ngModel)]='layby.Customer.Name' 
+           [disabled]='!isNew'>
+    <mat-select *ngIf='isNew' [(ngModel)]='selectedCustomer' 
+                              placeholder="Customer">
+      <mat-option *ngFor="let customer of customers" 
+                  [value]='customer'> {{ customer.Name }} </mat-option>
+    </mat-select>
+  </mat-input-container>
+  <div *ngIf="selectedCustomer !== undefined && selectedCustomer.HasBadHistory">
+    <br>
+    <mat-card color='primary'>
+      <span style="text-align:center;">Customer has bad history!</span>
+    </mat-card>
+  </div>
+</mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-title>
+      <span>Order</span>
+      <span class="spacer"></span>
+      <button mat-mini-fab class="fab-add-button" (click)='addNewOrderItem()'>+</button>
+    </mat-card-title>
+    <div *ngFor='let i of layby.Order.OrderedItems'>
+      <app-order-item-details [isDisabled]='!isNew' [orderItem]='i'></app-order-item-details>
+    </div>
+</mat-card>
+<mat-card>
+  <mat-card-title align='right'>
+    <span>Amount Owing: </span>
+    <span>{{ laybyTotal | dollars }}</span>
+  </mat-card-title>
+</mat-card>
+<mat-card>
+  <mat-card-actions *ngIf='isNew === true' align="right">
+    <button mat-raised-button 
+          color="primary" 
+          (click)="save()">Create</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf='isNew === false' align='right'>
+    <button mat-raised-button 
+          color='primary' 
+          (click)="makePayment()">Make A Payment</button>
+    <button mat-raised-button 
+          color='primary' 
+          (click)="save()">Update</button>
+    <button mat-raised-button 
+          color='warn' 
+          (click)="delete()">Delete</button>
+  </mat-card-actions>
+</mat-card>

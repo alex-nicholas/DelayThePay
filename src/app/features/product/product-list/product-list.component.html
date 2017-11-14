@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>
+    <span>Products</span>
+    <span class="spacer"></span>
+    <button mat-mini-fab class="fab-add-button" [routerLink]="['/product-profile', id]">+</button>
+  </mat-card-title>
+  
+  <mat-card-content>
+    <dx-data-grid
+    #productGrid
+    id="gridContainer"
+    [dataSource]="products"
+    [hoverStateEnabled]="true"
+    [selectedRowKeys]="[]"
+    [columns]="['Name', 'Description', 'Price']" (dblclick)="viewDetails(productGrid.selectedRowKeys[0].Id)">
+    <dxo-selection mode='single'></dxo-selection>
+    </dx-data-grid>
+  </mat-card-content>
+</mat-card>

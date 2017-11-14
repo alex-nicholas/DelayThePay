@@ -1,0 +1,9 @@
+/*
+    Toolbar
+*/
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+.toolbar-icon {
+    padding-right: 14px;
+}

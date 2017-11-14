@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-title *ngIf='isNew === false'>{{customer.Name}}</mat-card-title>
+    <mat-card-title *ngIf='isNew === true'>New Customer</mat-card-title>
+    <mat-card-subtitle class="card-subtitle">Customer Profile</mat-card-subtitle>
+  <mat-card-content>
+
+    <mat-input-container class="card-content">
+      <input matInput name="customerName" placeholder="Customer Name" [(ngModel)]='customer.Name'>
+    </mat-input-container>
+
+    <br>
+    <br>
+
+    <mat-input-container class="card-content">
+      <input matInput type="email" name="customerEmail" placeholder="Email Address" [(ngModel)]='customer.Email'>
+    </mat-input-container>
+
+    <br>
+    <br>
+
+    <mat-input-container class="card-content">
+      <input matInput type="tel" name="customerPhone" placeholder="Customer Phone" [(ngModel)]='customer.Phone'>
+    </mat-input-container>
+
+    <br>
+    <br>
+
+    <mat-input-container class="card-content">
+      <input matInput name="licenceNumber" placeholder="Licence Number" [(ngModel)]='customer.LicenceNumber'>
+    </mat-input-container>
+
+    <br>
+    <br>
+
+    <mat-checkbox matInput name="badHistory" [(ngModel)]='customer.HasBadHistory' >Has Bad Payment History</mat-checkbox>
+
+    <br>
+    <br>
+
+  </mat-card-content>
+  <mat-card-actions *ngIf='isNew === true' align="right">
+    <button mat-raised-button color="primary" (click)="save()" >Create</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf='isNew === false' align='right'>
+    <button mat-raised-button color='primary' (click)="save()">Update</button>
+    <button mat-raised-button color='warn' (click)="delete()">Delete</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class='card' *ngIf='!isNew'>
+  <mat-card-title> {{customer.Name}}'s Laybys</mat-card-title>
+  <br>
+  <mat-card-content>
+    <app-customer-laybys></app-customer-laybys>
+  </mat-card-content>
+  <mat-card-actions>
+    <br><br>
+  </mat-card-actions>
+</mat-card>

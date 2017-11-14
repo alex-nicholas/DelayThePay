@@ -1,0 +1,23 @@
+<mat-card style="height:45px;">
+  <div *ngIf='orderItem'>
+    <div fxFlexOffset.gt-sm="0%" fxFlex.gt-sm="33%">
+      <mat-input-container>
+        <mat-select [(ngModel)]='orderItem.ProductOrdered' 
+                              placeholder="Product"  [disabled]='isDisabled'>
+          <mat-option *ngFor="let product of products" 
+                  [value]='product'>{{ product.Name }}</mat-option>
+        </mat-select>
+      </mat-input-container>
+    </div>
+    <div fxFlexOffset.gt-sm="0%" fxFlex.gt-sm="33%">
+      <mat-input-container>
+        <input type="number" placeholder="Qty" matInput [(ngModel)]='orderItem.OrderedQuantity' required [disabled]='isDisabled'> 
+      </mat-input-container>
+    </div>
+    <div fxFlexOffset.gt-sm='0%' fxFlex.gt.sm="33%">
+      <mat-input-container>
+        <input type="number" placeholder="Total" matInput [(ngModel)]='total' disabled='true'> 
+      </mat-input-container>
+    </div>
+  </div>
+</mat-card>
