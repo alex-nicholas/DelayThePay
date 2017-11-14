@@ -1,7 +1,6 @@
 export enum PaymentType {
     DebitCard,
     CreditCard,
-    Cash,
     PayPal,
 }
 
@@ -17,10 +16,6 @@ export enum LaybyType {
 }
 
 export enum LaybyDuration {
-    OneMonth,
-    TwoMonths,
     ThreeMonths,
-    FourMonths,
-    FiveMonths,
     SixMonths
 }
