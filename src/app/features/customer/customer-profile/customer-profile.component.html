@@ -32,7 +32,7 @@
     <br>
     <br>
 
-    <mat-checkbox matInput name="badHistory" [(ngModel)]='customer.HasBadHistory' >Has Bad Payment History</mat-checkbox>
+    <mat-checkbox matInput name="badHistory" [(ngModel)]='customer.HasBadHistory' *ngIf='!isNew'>Has Bad Payment History</mat-checkbox>
 
     <br>
     <br>

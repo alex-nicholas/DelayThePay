@@ -54,4 +54,5 @@ export class CustomerProfileComponent implements OnInit {
   private backToCustomers() {
     this._router.navigateByUrl('/customers');
   }
+
 }
