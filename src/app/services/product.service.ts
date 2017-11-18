@@ -1,35 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/observable';
+import { ServiceBase } from './svc-base';
 
 @Injectable()
-export class ProductService {
-
+export class ProductService extends ServiceBase {
+  private _apiAddress = this.apiAddress + '/Product';
   private products: Array<Product> = [];
-  constructor() {
-    this.products = [{
-      Id: 'a',
-      Name: 'Canvas Collection',
-      Price: 1750,
-      Description: 'Collection of three 16*20 inch Canvases'
-    },{
-      Id:'b',
-      Name:'Acrylic Collection',
-      Price: 1750,
-      Description: 'Two 12*8 Acrylic Blocks and one 12*12'
-    },{
-      Id:'c',
-      Name:'Framed Collection',
-      Price: 1750,
-      Description: 'A collection of framed wall art'
-    }]
+  constructor(private _http: HttpClient) {
+      super();
    }
 
-  getProducts(): Array<Product> {
-    return this.products;
+  getProducts(): Observable<Array<Product>> {
+    return this._http.get<Array<Product>>(this._apiAddress);
   }
 
-  getProduct(id:string): Product {
-    return this.products.find(i => i.Id === id);
+  getProduct(id: string): Observable<Product> {
+    return this._http.get<Product>(this._apiAddress + '/' + id);
   }
 
   createProduct(product: Product): void {
@@ -42,6 +30,6 @@ export class ProductService {
   }
 
   deleteProduct(id: string): void {
-    this.products.slice(this.products.findIndex(i => i.Id === id), 1);
+    this._http.delete(this._apiAddress + '/' + id);
   }
 }

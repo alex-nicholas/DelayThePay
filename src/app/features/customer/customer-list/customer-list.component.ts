@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../services/customer.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-customer-list',
@@ -14,13 +15,16 @@ export class CustomerListComponent implements OnInit {
     private _custSvc: CustomerService,
     private _router: Router
   ) { }
-  
-  customers: Customer[];
+  customers$: Observable<Array<Customer>>;
 
   ngOnInit() {
-    this.customers = this._custSvc.getCustomers();
+    this.getCustomers();
   }
   
+  getCustomers() {
+    this.customers$ = this._custSvc.getCustomers();
+  }
+
   viewDetails(id: string) {
     this._router.navigateByUrl('/customer-profile/' + id);
   }

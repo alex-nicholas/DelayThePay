@@ -4,8 +4,8 @@
       <mat-input-container>
         <mat-select [(ngModel)]='orderItem.ProductOrdered' 
                               placeholder="Product"  [disabled]='isDisabled'>
-          <mat-option *ngFor="let product of products" 
-                  [value]='product'>{{ product.Name }}</mat-option>
+          <mat-option *ngFor="let product of products$ | async" 
+                  [value]='product'>{{ product.ProductName }}</mat-option>
         </mat-select>
       </mat-input-container>
     </div>

@@ -18,7 +18,7 @@ export class PaymentService {
             layby.MinimumPayment
         );
         
-        if(!valid) return;
+        if (!valid) return;
 
         this._laybySvc.update(
             this.processPayment(

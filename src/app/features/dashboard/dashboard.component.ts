@@ -13,7 +13,7 @@ import { Layby } from '../../models/layby';
 })
 export class DashboardComponent implements OnInit {
 
-  customerCount: number = 31;
+  customerCount: number;
   activeLaybyCount: number = 24;
   totalLaybyValue: number = 0;
   payments: Array<Payment> = [];
@@ -25,7 +25,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.customerCount = this._customerSvc.getCustomers().length;
+    this._customerSvc.getCustomers()
+        .subscribe(customers => 
+                    this.customerCount = customers.length
+                  );
     this.activeLaybyCount = this.getActiveLaybyCount();
     this.updateDisplay();
   }

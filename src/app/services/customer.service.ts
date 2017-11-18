@@ -1,46 +1,20 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Customer, LiteCustomer } from '../models/customer';
+import { ServiceBase } from './svc-base';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class CustomerService {
+export class CustomerService extends ServiceBase {
 
   private _customers: Customer[];
-
-  constructor() {
-    this._customers = this.initCustomers();
+  private _apiAddress = this.apiAddress + '/Contact';
+  constructor(private _http: HttpClient) {
+    super();
   }
 
-  initCustomers(): Array<Customer> {
-    return [{
-      'Id': 'a',
-      'Name': 'Alex Nicholas',
-      'Phone': '0414 104 962',
-      'Email': 'alexnicholasphoto@gmail.com',
-      'LicenceNumber': 87302289,
-      'Laybys': 1,
-      'HasBadHistory': false
-      }, {
-      'Id': 'b',
-      'Name': 'Tom Tilley',
-      'Phone': '0411 321 654',
-      'Email': 't_tillyio@gmail.com',
-      'LicenceNumber': 87302290,
-      'Laybys': 1,
-      'HasBadHistory': false
-      }, {
-      'Id': 'c',
-      'Name': 'Sara Speaker',
-      'Phone': '0488 885 996',
-      'Email': 'sez_speeks@gmail.com',
-      'LicenceNumber': 87302291,
-      'Laybys': 0,
-      'HasBadHistory': true
-      },
-    ];
-  }
-
-  getCustomers(): Array<Customer> {
-    return this._customers;
+  getCustomers(): Observable<Array<Customer>> {
+    return this._http.get<Array<Customer>>(this._apiAddress);
   }
 
   getLiteCustomers(): Array<LiteCustomer> {
@@ -51,14 +25,14 @@ export class CustomerService {
     return liteCustomers;
   }
 
-  getCustomer(id: string): Customer {
-    return this._customers.find(i => i.Id === id);
+  getCustomer(id: string): Observable<Customer> {
+    return this._http.get<Customer>(this._apiAddress + '/' + id);
   }
 
   create(customer: Customer): number {
     const newCustomer = this.setupNewCustomer(customer);
 
-    const match = this._customers.find(i => i.Email.toLowerCase() === newCustomer.Email.toLowerCase());
+    const match = this._customers.find(i => i.EmailAddress.toLowerCase() === newCustomer.EmailAddress.toLowerCase());
 
     if (match === null || match === undefined) {
       this._customers.push(newCustomer);
@@ -78,8 +52,7 @@ export class CustomerService {
   }
 
   private setupNewCustomer(customer: Customer): Customer {
-    customer.Id = Math.random().toString();
-    customer.Laybys = 0;
+    customer.LaybyIds = [];
     customer.HasBadHistory = false;
 
     return customer;

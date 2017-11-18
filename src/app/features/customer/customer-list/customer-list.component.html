@@ -9,10 +9,11 @@
     <dx-data-grid
     #customerGrid
     id="gridContainer"
-    [dataSource]="customers"
+    [dataSource]="customers$ | async"
+    [columnHidingEnabled]="true"
     [hoverStateEnabled]="true"
     [selectedRowKeys]="[]"
-    [columns]="['Name', 'Email', 'Phone', 'Laybys']" (dblclick)="viewDetails(customerGrid.selectedRowKeys[0].Id)">
+    [columns]="['Name', 'EmailAddress', 'PhoneNumber', 'LaybyIds.length']" (dblclick)="viewDetails(customerGrid.selectedRowKeys[0].Id)">
     <dxo-selection mode='single'></dxo-selection>
     </dx-data-grid>
   </mat-card-content>

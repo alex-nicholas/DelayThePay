@@ -1,11 +1,11 @@
 <mat-card>
-  <mat-card-title *ngIf='!isNew'>{{ product.Name }}</mat-card-title>
+  <mat-card-title *ngIf='!isNew'>{{ product.ProductName }}</mat-card-title>
   <mat-card-title *ngIf='isNew === true'>New Product</mat-card-title>
   <mat-card-subtitle class="card-subtitle">Product Details</mat-card-subtitle>
 <mat-card-content>
 
   <mat-input-container class="card-content">
-    <input matInput name="product" placeholder="Product Name" [(ngModel)]='product.Name' [disabled]='!isNew'>
+    <input matInput name="product" placeholder="Product Name" [(ngModel)]='product.ProductName' [disabled]='!isNew'>
   </mat-input-container>
   
   <br>
@@ -19,7 +19,7 @@
   <br>
 
   <mat-input-container class="card-content">
-    <input matInput type="number" name="price" placeholder="Price" [(ngModel)]='product.Price'>
+    <input matInput type="number" name="price" placeholder="Price" [(ngModel)]='product.ProductPrice'>
   </mat-input-container>
 
 </mat-card-content>

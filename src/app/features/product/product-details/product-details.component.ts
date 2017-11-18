@@ -44,8 +44,8 @@ export class ProductDetailsComponent implements OnInit {
     this._router.navigateByUrl('/products');
   }
 
-  private getProduct(): Product {
-    return this.product = this._productSvc.getProduct(this.id);
+  private getProduct(): void {
+    this._productSvc.getProduct(this.id).subscribe(prod => this.product = prod);
   }
 
   private navigateToProducts() {

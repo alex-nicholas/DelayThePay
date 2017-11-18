@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../models/product';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'dtp-product-list',
@@ -11,11 +12,15 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   id = 'New';
-  products: Product[];
+  products$: Observable<Array<Product>>;
   constructor(private _productSvc: ProductService, private _router: Router) { }
 
   ngOnInit() {
-    this.products = this._productSvc.getProducts();
+    this.getProducts();
+  }
+
+  getProducts(): void {
+    this.products$ = this._productSvc.getProducts();
   }
 
   viewDetails(id: string) {

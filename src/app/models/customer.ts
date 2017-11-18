@@ -1,10 +1,10 @@
 export class Customer {
     Id: string;
     Name: string;
-    Email: string;
-    Phone: string;
-    Laybys: number;
-    LicenceNumber: number;
+    EmailAddress: string;
+    PhoneNumber: string;
+    LaybyIds: number[];
+    LicenceNumber: string;
     HasBadHistory: boolean;
 }
 

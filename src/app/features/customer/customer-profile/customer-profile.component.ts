@@ -29,7 +29,7 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   getCustomer() {
-    this.customer = this._custSvc.getCustomer(this._id);
+    this._custSvc.getCustomer(this._id).subscribe(cust => this.customer = cust);
   }
 
   save() {

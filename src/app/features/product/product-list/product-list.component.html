@@ -9,10 +9,10 @@
     <dx-data-grid
     #productGrid
     id="gridContainer"
-    [dataSource]="products"
+    [dataSource]="products$ | async"
     [hoverStateEnabled]="true"
     [selectedRowKeys]="[]"
-    [columns]="['Name', 'Description', 'Price']" (dblclick)="viewDetails(productGrid.selectedRowKeys[0].Id)">
+    [columns]="['ProductName', 'Description', 'ProductPrice']" (dblclick)="viewDetails(productGrid.selectedRowKeys[0].Id)">
     <dxo-selection mode='single'></dxo-selection>
     </dx-data-grid>
   </mat-card-content>
