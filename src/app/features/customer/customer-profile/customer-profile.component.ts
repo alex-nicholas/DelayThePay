@@ -34,6 +34,7 @@ export class CustomerProfileComponent implements OnInit {
 
   save() {
     this.isNew ? this.create() : this.update();
+    this.backToCustomers();
   }
 
   delete() {
@@ -43,12 +44,10 @@ export class CustomerProfileComponent implements OnInit {
 
   update() {
     this._custSvc.update(this.customer);
-    this.backToCustomers();
   }
 
-  create() {
-    this._custSvc.create(this.customer);
-    this.backToCustomers();
+  create(): number {
+    return this._custSvc.create(this.customer);
   }
 
   private backToCustomers() {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Customer, LiteCustomer } from '../models/customer';
 import { ServiceBase } from './svc-base';
 import { Observable } from 'rxjs/Observable';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class CustomerService extends ServiceBase {
@@ -32,14 +33,9 @@ export class CustomerService extends ServiceBase {
   create(customer: Customer): number {
     const newCustomer = this.setupNewCustomer(customer);
 
-    const match = this._customers.find(i => i.EmailAddress.toLowerCase() === newCustomer.EmailAddress.toLowerCase());
-
-    if (match === null || match === undefined) {
-      this._customers.push(newCustomer);
-      return 0;
-    } else {
-      return 1;
-    }
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this._http.post(this._apiAddress, JSON.stringify(newCustomer), {headers}).subscribe();
+    return 0;
   }
 
   update(customer: Customer) {
