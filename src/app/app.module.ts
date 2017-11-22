@@ -18,13 +18,14 @@ import { LaybyService } from './services/layby.service';
 import { MakePaymentComponent } from './features/payments/make-payment/make-payment.component';
 import { PaymentService } from './services/payment.service';
 import { CustomerLaybysComponent } from './features/customer/customer-laybys/customer-laybys.component';
-import { DollarsPipe } from './Infrastructure/dollarPipe';
+import { DollarsPipe } from './Infrastructure/pipes/dollarPipe';
 import { OrderItemDetailsComponent } from './features/order/order-item-details/order-item-details.component';
 import { ProductDetailsComponent } from './features/product/product-details/product-details.component';
 import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { LaybyTotalComponent } from './features/layby/layby-total/layby-total.component';
 import { ProductListComponent } from './features/product/product-list/product-list.component';
+import { CustomerValidator } from './Infrastructure/validators/customer-validation.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ProductListComponent } from './features/product/product-list/product-li
     PaymentService,
     OrderService,
     ProductService,
+    CustomerValidator
   ],
   bootstrap: [AppComponent]
 })

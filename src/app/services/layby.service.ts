@@ -1,54 +1,76 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/observable';
+
 import { Layby } from '../models/layby';
+import { ServiceBase } from './svc-base';
+import { LaybyValidator } from '../Infrastructure/validators/layby-validation.service';
+import { LaybyValidationModel } from '../models/validation-models/layby-validation.model';
 
 @Injectable()
-export class LaybyService {
+export class LaybyService extends ServiceBase {
 
     private _laybys: Layby[] = [];
-
-    constructor() {
-
+    private _apiAddress = this.apiAddress + '/Layby';
+    constructor(private _http: HttpClient,
+                private _validator: LaybyValidator ) {
+        super();
     }
 
-    getLaybys(): Layby[] {
-        return this._laybys;
+    getLaybys(): Observable<Array<Layby>> {
+        return this._http.get<Array<Layby>>(this._apiAddress);
     }
 
     getTotalValue(): number {
         let value = 0;
-        this._laybys.forEach((layby) => {
-            layby.Order.OrderedItems.forEach((item) => {
-                value += item.ItemTotal;
-            });
+        let laybys: Layby[];
+
+        this.getLaybys().subscribe((data) => {
+            laybys = data;
         });
+        
+        laybys.forEach((layby) => {
+            value += layby.Order.OrderTotal;
+        });
+
         return value;
     }
 
     getLaybysForCustomer(customerId: string): Layby[] {
-        return this._laybys.filter(i => i.Customer.Id === customerId);
+        let laybysForCustomer: Layby[];
+        this.getLaybys().subscribe((data) => {
+            laybysForCustomer = data.filter(i => i.Customer.Id === customerId);
+        });
+        return laybysForCustomer;
     }
 
-    getLayby(id: string): Layby {
-        return this._laybys.find(i => i.Id === id);
+    getLayby(id: string): Observable<Layby> {
+        return this._http.get<Layby>(this._apiAddress + '/' + id);
     }
 
-    update(layby: Layby): void {
-        this._laybys.splice(this._laybys.findIndex(i => i.Id === layby.Id), 1);
-        this._laybys.push(layby);
+    update(layby: Layby): LaybyValidationModel {
+        const validatedModel = this._validator.validate(layby);
+        if (validatedModel.valid) {
+            this._http.put(this._apiAddress + '/' + layby.Id, 
+                           layby, 
+                           { headers: this.getHeaders() })
+                           .subscribe();
+        }
+        return validatedModel;
     }
 
-    create(layby: Layby): void {
-        const newLayby = this.setupNewLayby(layby);
-        this._laybys.push(newLayby);
+    create(layby: Layby): LaybyValidationModel {
+        const validatedModel = this._validator.validate(layby);
+        if (validatedModel.valid) {
+            this._http.post(this._apiAddress, 
+                            validatedModel.layby, 
+                            {headers: this.getHeaders()})
+                            .subscribe();
+        }
+        return validatedModel;
     }
 
-    delete(id:string): void {
-        this._laybys.splice(this._laybys.findIndex(i => i.Id === id), 1);
-    }
-
-    private setupNewLayby(layby: Layby): Layby {
-        layby.Id = Math.random().toString();
-        layby.DateCreated = new Date().toDateString()
-        return layby;
+    delete(id: string): void {
+        this._http.delete(this._apiAddress + '/' + id).subscribe();
     }
 }

@@ -4,6 +4,15 @@
     <mat-card-subtitle class="card-subtitle">Customer Profile</mat-card-subtitle>
   <mat-card-content>
 
+    <mat-card class='warning' *ngIf='errors'>
+      <ul>
+        <li *ngFor='let error of errors'>{{ error }}</li>
+      </ul>
+    </mat-card>
+
+    <br *ngIf='errors'>
+    <br *ngIf='errors'>
+
     <mat-input-container class="card-content">
       <input matInput name="customerName" placeholder="Customer Name" [(ngModel)]='customer.Name'>
     </mat-input-container>

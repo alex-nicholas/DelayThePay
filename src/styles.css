@@ -29,6 +29,11 @@ body {
     cursor: pointer;
 }
 
+.warning {
+    background-color: rgb(187, 43, 43);
+    color: white;
+}
+
 /*
     Component Styling (Global)
 */

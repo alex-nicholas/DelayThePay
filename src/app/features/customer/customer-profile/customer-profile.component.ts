@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
+import { CustomerValidator } from '../../../Infrastructure/validators/customer-validation.service';
 
 @Component({
   selector: 'dtp-customer-profile',
@@ -13,11 +14,13 @@ export class CustomerProfileComponent implements OnInit {
   private _id: string;
   isNew: boolean;
   customer: Customer = new Customer();
+  errors: string[];
 
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
-    private _custSvc: CustomerService
+    private _custSvc: CustomerService,
+    private _validator: CustomerValidator
   ) { }
 
   ngOnInit() {
@@ -34,7 +37,7 @@ export class CustomerProfileComponent implements OnInit {
 
   save() {
     this.isNew ? this.create() : this.update();
-    this.backToCustomers();
+    
   }
 
   delete() {
@@ -42,12 +45,22 @@ export class CustomerProfileComponent implements OnInit {
     this.backToCustomers();
   }
 
-  update() {
-    this._custSvc.update(this.customer);
+  update(): void {
+    const validated = this._custSvc.update(this.customer);
+    if (validated.valid) {
+      this.backToCustomers();
+    } else {
+      this.errors = validated.errors;
+    }
   }
 
-  create(): number {
-    return this._custSvc.create(this.customer);
+  create(): void {
+    const validated = this._custSvc.create(this.customer);
+    if (validated.valid) {
+      this.backToCustomers();
+    } else {
+      this.errors = validated.errors;
+    }
   }
 
   private backToCustomers() {
