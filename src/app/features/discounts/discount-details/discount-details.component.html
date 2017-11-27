@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-title *ngIf='isNew === false'>{{ discount.DiscountName }}</mat-card-title>
+  <mat-card-title *ngIf='isNew === true'>New Discount</mat-card-title>
+  <mat-card-subtitle class="card-subtitle">Discount Details</mat-card-subtitle>
+  <mat-card-content>
+    <mat-input-container class="card-content">
+      <input matInput name="discountName" 
+             placeholder="Discount Name" 
+             [(ngModel)]='discount.DiscountName' 
+             [disabled]='!isNew'>
+    </mat-input-container>
+    <br>
+    <br>
+    <mat-input-container>
+      <input matInput name="discountPercentage"
+             placeholder="Discount Percentage"
+             [(ngModel)]='discount.DiscountPercentage'>
+    </mat-input-container>
+    <br>
+    <br>
+    <mat-input-container>
+      <input matInput name='discountCode'
+             placeholder="Discount Code"
+             [(ngModel)]='discount.DiscountCode'>
+    </mat-input-container>
+  </mat-card-content>
+  <mat-card-actions *ngIf='isNew === true' align="right">
+    <button mat-raised-button 
+          color="primary" 
+          (click)="save()">Create</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf='isNew === false' align='right'>
+    <button mat-raised-button 
+          color='primary' 
+          (click)="save()">Update</button>
+    <button mat-raised-button 
+          color='warn' 
+          (click)="delete()">Delete</button>
+  </mat-card-actions>
+</mat-card>

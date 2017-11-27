@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-card-title>
+      <span>Discount</span>
+      <span class="spacer"></span>
+      <button mat-mini-fab class="fab-add-button" [routerLink]="['/discount-profile', 'New']">+</button>
+    </mat-card-title>
+    
+    <mat-card-content>
+      <dx-data-grid
+      #discountGrid
+      id="gridContainer"
+      [dataSource]="discounts"
+      [hoverStateEnabled]="true"
+      [selectedRowKeys]="[]"
+      [columns]="['DiscountName', 
+                  'DiscountPercentage', 
+                  'DiscountCode']" 
+      (dblclick)='viewDetails(discountGrid.selectedRowKeys[0].Id)'>
+      <dxo-selection mode='single'></dxo-selection>
+      </dx-data-grid>
+    </mat-card-content>
+  </mat-card>

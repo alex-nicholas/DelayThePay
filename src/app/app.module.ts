@@ -21,16 +21,21 @@ import { CustomerLaybysComponent } from './features/customer/customer-laybys/cus
 import { DollarsPipe } from './Infrastructure/pipes/dollarPipe';
 import { OrderItemDetailsComponent } from './features/order/order-item-details/order-item-details.component';
 import { ProductDetailsComponent } from './features/product/product-details/product-details.component';
-import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { LaybyTotalComponent } from './features/layby/layby-total/layby-total.component';
 import { ProductListComponent } from './features/product/product-list/product-list.component';
 import { CustomerValidator } from './Infrastructure/validators/customer-validation.service';
+import { DiscountComponent } from './features/discounts/discount.component';
+import { DiscountDetailsComponent } from './features/discounts/discount-details/discount-details.component';
+import { DiscountValidator } from './Infrastructure/validators/discount-validation.service';
+import { DiscountService } from './services/discount.service';
+import { PercentPipe } from '@angular/common/src/pipes/number_pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DollarsPipe,
+    PercentPipe,
     WelcomeComponent,
     CustomerProfileComponent,
     LaybyProfileComponent,
@@ -42,7 +47,9 @@ import { CustomerValidator } from './Infrastructure/validators/customer-validati
     OrderItemDetailsComponent,
     ProductDetailsComponent,
     LaybyTotalComponent,
-    ProductListComponent
+    ProductListComponent,
+    DiscountComponent,
+    DiscountDetailsComponent
   ],
   imports: [
     FormsModule,
@@ -56,9 +63,10 @@ import { CustomerValidator } from './Infrastructure/validators/customer-validati
     CustomerService,
     LaybyService,
     PaymentService,
-    OrderService,
     ProductService,
-    CustomerValidator
+    DiscountService,
+    CustomerValidator,
+    DiscountValidator
   ],
   bootstrap: [AppComponent]
 })

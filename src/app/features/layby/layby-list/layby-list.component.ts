@@ -19,7 +19,10 @@ export class LaybyListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.laybys = this._laybySvc.getLaybys();
+    this._laybySvc.getLaybys()
+      .subscribe((data) => {
+        this.laybys = data;
+      });
   }
 
   viewDetails(id: string) {
